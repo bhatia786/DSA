@@ -2,21 +2,19 @@
 #include<vector>
 #include<limits.h>
 using namespace std;
-void solve(vector<int>& arr,int i,int& maxi,int sum){
+int solve(vector<int>& arr,int i,int sum){
+    int maxi=INT_MIN;
     if(i>=arr.size()){
         maxi=max(sum,maxi);
-        return;
+        return maxi;
     }
-    //include
-    solve(arr,i+2,maxi,sum+arr[i]);
-    //exclude
-    solve(arr,i+1,maxi,sum);
+    int ans1=solve(arr,i+2,sum+arr[i]);
+    int ans2=solve(arr,i+1,sum);
+    return max(ans1,ans2);
 }
 int main() {
-  vector<int>arr{12,10,10,11};
+  vector<int>arr{1,3,5,7,10};
   int i=0;
-  int maxi=INT_MIN;
   int sum=0;
-  solve(arr,i,maxi,sum);
-  cout<<maxi;
+  cout<<solve(arr,i,sum);
 }
